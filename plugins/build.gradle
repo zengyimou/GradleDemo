@@ -1,0 +1,27 @@
+plugins {
+    id 'groovy' // （必选）用于实现插件
+    id 'maven-publish'  // 用于发布插件
+}
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+}
+
+publishing {
+    // 定义发布什么
+    publications {
+        plugin(MavenPublication) {
+            groupId = "test.gradle"
+            artifactId = 'Myplugin'
+            version = '1.0.0'
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            name = 'repo'
+            url = "../repo"
+        }
+    }
+}
